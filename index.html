@@ -1,35 +1,76 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Website Saya</title>
+    <title>Quiz App</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <div class="logo">
-          <a href="#">MyWebsiteguweh</a>
+    <div class="container">
+      <!-- Subject Selection Screen -->
+      <div id="subject-screen">
+        <h1>Selamat Datang di Quiz</h1>
+        <p>Pilih mata pelajaran yang ingin kamu pelajari:</p>
+        <div class="subject-buttons">
+          <button class="button subject-btn" onclick="selectSubject('math')">
+            Matematika
+          </button>
+          <button class="button subject-btn" onclick="selectSubject('science')">
+            IPA
+          </button>
+          <button class="button subject-btn" onclick="selectSubject('social')">
+            IPS
+          </button>
         </div>
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#services" class="nav-link">Services</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
       </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Selamat Datang di Website Saya</h1>
-        <p>Temukan berbagai informasi menarik di sini</p>
-        <button class="btn">Mulai Sekarang</button>
+      <!-- Start Screen -->
+      <div id="start-screen" style="display: none">
+        <h1 id="quiz-title">Quiz</h1>
+        <p>Terdapat 20 pertanyaan yang harus dijawab</p>
+        <button class="button" onclick="startQuiz()">Mulai Kuis</button>
+        <button class="button" onclick="backToSubjects()">
+          Ganti Mata Pelajaran
+        </button>
       </div>
-    </section>
+
+      <!-- Quiz Container -->
+      <div id="quiz-container">
+        <div id="progress">
+          Soal <span id="current-question">1</span> dari
+          <span id="total-questions">5</span>
+        </div>
+        <div class="question">
+          <h2 id="question-text"></h2>
+          <div class="options" id="options-container"></div>
+        </div>
+        <button class="button" onclick="nextQuestion()">Next</button>
+      </div>
+
+      <!-- Result Screen -->
+      <div id="result-screen">
+        <h1>Hasil Quiz</h1>
+        <p>
+          Skor anda: <span id="score">0</span> dari
+          <span id="total-score">5</span>
+        </p>
+        <div id="review-container"></div>
+        <button class="button" onclick="showReview()">
+          Lihat Review Jawaban
+        </button>
+        <button class="button" onclick="restartQuiz()">Mulai Ulang</button>
+      </div>
+
+      <!-- Review Screen -->
+      <div id="review-screen" style="display: none">
+        <h1>Review Jawaban</h1>
+        <div id="review-answers"></div>
+        <button class="button" onclick="backToResult()">
+          Kembali ke Hasil
+        </button>
+      </div>
+    </div>
 
     <script src="script.js"></script>
   </body>
