@@ -1,0 +1,32 @@
+name: Deploy to Azure VM
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: 22
+          script: |
+            # 1. Masuk ke folder project
+            cd /var/www/mjstest
+
+            # 2. Tarik kodingan terbaru dari GitHub
+            # Karena kita pakai permission 770 & group www-data, user 'deploy' bisa tulis disini
+            git pull origin main
+
+            # 3. (Opsional) Jika perlu restart Nginx
+            # sudo systemctl reload nginx
